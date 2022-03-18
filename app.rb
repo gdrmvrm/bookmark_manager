@@ -4,6 +4,8 @@ require_relative './lib/bookmark'
 require './database_connection_setup'
 require 'uri'
 require 'sinatra/flash'
+require_relative './lib/comment'
+
 
 class BookmarkManager < Sinatra::Base
   configure :development do
@@ -52,11 +54,7 @@ end
   end
 
   post '/bookmarks/:id/comments' do
-    connection = PG.connect(dbname: 'bookmark_manager_test')
-    connection.exec_params(
-      "INSERT INTO comments (text, bookmark_id) VALUES($1, $2);",
-      [params[:comment], params[:id]]
-      )
+    Comment.create(text: params[:comment], bookmark_id: params[:id])
     redirect '/bookmarks'
   end
 

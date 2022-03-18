@@ -17,10 +17,10 @@
     </form>
     <ul>
       <% bookmark.comments.each do |comment| %>
-        <li><%= comment['text'] %></li>
+        <li><%= comment.text %></li>
       <% end %>
     </ul>
    </li>
 <% end %>
 </ul>
-<p><%= flash[:notice] %></p>
+<h2><%= flash[:notice] %></h2>
